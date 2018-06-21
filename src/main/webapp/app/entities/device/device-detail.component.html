@@ -1,0 +1,58 @@
+
+<div *ngIf="device">
+    <h2><span jhiTranslate="appinventoryApp.device.detail.title">Device</span> {{device.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="appinventoryApp.device.vendor">Vendor</span></dt>
+        <dd>
+            <span>{{device.vendor}}</span>
+        </dd>
+        <dt><span jhiTranslate="appinventoryApp.device.version">Version</span></dt>
+        <dd>
+            <span>{{device.version}}</span>
+        </dd>
+        <dt><span jhiTranslate="appinventoryApp.device.model">Model</span></dt>
+        <dd>
+            <span>{{device.model}}</span>
+        </dd>
+        <dt><span jhiTranslate="appinventoryApp.device.serialNumber">Serial Number</span></dt>
+        <dd>
+            <span>{{device.serialNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="appinventoryApp.device.computerName">Computer Name</span></dt>
+        <dd>
+            <span>{{device.computerName}}</span>
+        </dd>
+        <dt><span jhiTranslate="appinventoryApp.device.systemType">System Type</span></dt>
+        <dd>
+            <span>{{device.systemType}}</span>
+        </dd>
+        <dt><span jhiTranslate="appinventoryApp.device.owner">Owner</span></dt>
+        <dd>
+            <span>{{device.owner}}</span>
+        </dd>
+        <dt><span jhiTranslate="appinventoryApp.device.notes">Notes</span></dt>
+        <dd>
+            <span>{{device.notes}}</span>
+        </dd>
+        <dt><span jhiTranslate="appinventoryApp.device.created">Created</span></dt>
+        <dd>
+            <span>{{device.created | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'device/'+ device.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

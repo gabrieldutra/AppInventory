@@ -38,6 +38,7 @@ public class CacheConfiguration {
             cm.createCache(br.com.appprova.appinventory.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(br.com.appprova.appinventory.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(br.com.appprova.appinventory.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(br.com.appprova.appinventory.domain.Device.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

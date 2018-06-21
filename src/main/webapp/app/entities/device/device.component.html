@@ -1,0 +1,82 @@
+<div>
+    <h2>
+        <span jhiTranslate="appinventoryApp.device.home.title">Devices</span>
+        <button class="btn btn-primary float-right jh-create-entity create-device" [routerLink]="['/', { outlets: { popup: ['device-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="appinventoryApp.device.home.createLabel">
+            Create new Device
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="devices">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="vendor"><span jhiTranslate="appinventoryApp.device.vendor">Vendor</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="version"><span jhiTranslate="appinventoryApp.device.version">Version</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="model"><span jhiTranslate="appinventoryApp.device.model">Model</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="serialNumber"><span jhiTranslate="appinventoryApp.device.serialNumber">Serial Number</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="computerName"><span jhiTranslate="appinventoryApp.device.computerName">Computer Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="systemType"><span jhiTranslate="appinventoryApp.device.systemType">System Type</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="owner"><span jhiTranslate="appinventoryApp.device.owner">Owner</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="notes"><span jhiTranslate="appinventoryApp.device.notes">Notes</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="created"><span jhiTranslate="appinventoryApp.device.created">Created</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let device of devices ;trackBy: trackId">
+                <td><a [routerLink]="['../device', device.id ]">{{device.id}}</a></td>
+                <td>{{device.vendor}}</td>
+                <td>{{device.version}}</td>
+                <td>{{device.model}}</td>
+                <td>{{device.serialNumber}}</td>
+                <td>{{device.computerName}}</td>
+                <td>{{device.systemType}}</td>
+                <td>{{device.owner}}</td>
+                <td>{{device.notes}}</td>
+                <td>{{device.created | date:'medium'}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../device', device.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'device/'+ device.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'device/'+ device.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="devices && devices.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

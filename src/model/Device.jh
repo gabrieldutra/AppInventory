@@ -1,0 +1,15 @@
+entity Device {
+    vendor String,
+    version String,
+    model String,
+    serialNumber String,
+    computerName String,
+    systemType String,
+    owner String,
+    notes String,
+    created ZonedDateTime
+}
+// Set pagination options
+paginate Device with pagination
+
+dto * with mapstruct
