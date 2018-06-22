@@ -50,7 +50,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="notes" type="varchar(255)">
+            <column name="notes" type="clob">
                 <constraints nullable="true" />
             </column>
 

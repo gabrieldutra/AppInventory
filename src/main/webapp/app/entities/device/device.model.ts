@@ -10,7 +10,7 @@ export class Device implements BaseEntity {
         public computerName?: string,
         public systemType?: string,
         public owner?: string,
-        public notes?: string,
+        public notes?: any,
         public created?: any,
     ) {
     }

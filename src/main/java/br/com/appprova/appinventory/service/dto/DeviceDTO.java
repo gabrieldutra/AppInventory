@@ -4,6 +4,7 @@ package br.com.appprova.appinventory.service.dto;
 import java.time.ZonedDateTime;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the Device entity.
@@ -26,6 +27,7 @@ public class DeviceDTO implements Serializable {
 
     private String owner;
 
+    @Lob
     private String notes;
 
     private ZonedDateTime created;

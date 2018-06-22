@@ -44,6 +44,7 @@ public class Device implements Serializable {
     @Column(name = "owner")
     private String owner;
 
+    @Lob
     @Column(name = "notes")
     private String notes;
 

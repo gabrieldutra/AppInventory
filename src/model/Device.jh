@@ -6,7 +6,7 @@ entity Device {
     computerName String,
     systemType String,
     owner String,
-    notes String,
+    notes TextBlob,
     created ZonedDateTime
 }
 // Set pagination options
