@@ -33,6 +33,8 @@
     "nativeLanguage": "pt-br",
     "languages": [
       "pt-br"
-    ]
+    ],
+    "herokuDeployType": "jar",
+    "herokuAppName": null
   }
 }
