@@ -6,8 +6,6 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { ProfileService } from '../profiles/profile.service';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from '../../shared';
 
-import { VERSION } from '../../app.constants';
-
 @Component({
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html',
@@ -32,7 +30,6 @@ export class NavbarComponent implements OnInit {
         private profileService: ProfileService,
         private router: Router
     ) {
-        this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
     }
 
