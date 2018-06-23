@@ -5,8 +5,10 @@
 /target/www/**
 /src/test/javascript/coverage/
 /src/test/javascript/PhantomJS*/
-src/main/resources/config/application-prod.yml
-src/main/resources/config/application-dev.yml
+/src/main/resources/config/application-prod.yml
+/src/main/resources/config/application-dev.yml
+/src/main/resources/config/application-heroku.yml
+/src/main/resources/config/bootstrap-heroku.yml
 
 ######################
 # Node
