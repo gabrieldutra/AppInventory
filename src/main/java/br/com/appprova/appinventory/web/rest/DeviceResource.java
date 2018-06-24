@@ -88,6 +88,7 @@ public class DeviceResource {
         if (deviceDTO.getId() == null) {
             return createDevice(deviceDTO);
         }
+        deviceDTO.setCreated(ZonedDateTime.now());
         Device device = deviceMapper.toEntity(deviceDTO);
         device = deviceRepository.save(device);
         DeviceDTO result = deviceMapper.toDto(device);

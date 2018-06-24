@@ -269,7 +269,6 @@ public class DeviceResourceIntTest {
         assertThat(testDevice.getSystemType()).isEqualTo(UPDATED_SYSTEM_TYPE);
         assertThat(testDevice.getOwner()).isEqualTo(UPDATED_OWNER);
         assertThat(testDevice.getNotes()).isEqualTo(UPDATED_NOTES);
-        assertThat(testDevice.getCreated()).isEqualTo(UPDATED_CREATED);
     }
 
     @Test
