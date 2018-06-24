@@ -1,5 +1,6 @@
 package br.com.appprova.appinventory.web.rest;
 
+import br.com.appprova.appinventory.security.AuthoritiesConstants;
 import com.codahale.metrics.annotation.Timed;
 import br.com.appprova.appinventory.domain.Device;
 
@@ -17,11 +18,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +62,7 @@ public class DeviceResource {
         if (deviceDTO.getId() != null) {
             throw new BadRequestAlertException("A new device cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        deviceDTO.setCreated(ZonedDateTime.now());
         Device device = deviceMapper.toEntity(deviceDTO);
         device = deviceRepository.save(device);
         DeviceDTO result = deviceMapper.toDto(device);
@@ -78,11 +82,13 @@ public class DeviceResource {
      */
     @PutMapping("/devices")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<DeviceDTO> updateDevice(@RequestBody DeviceDTO deviceDTO) throws URISyntaxException {
         log.debug("REST request to update Device : {}", deviceDTO);
         if (deviceDTO.getId() == null) {
             return createDevice(deviceDTO);
         }
+        deviceDTO.setCreated(ZonedDateTime.now());
         Device device = deviceMapper.toEntity(deviceDTO);
         device = deviceRepository.save(device);
         DeviceDTO result = deviceMapper.toDto(device);
@@ -99,11 +105,17 @@ public class DeviceResource {
      */
     @GetMapping("/devices")
     @Timed
+    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER})
     public ResponseEntity<List<DeviceDTO>> getAllDevices(Pageable pageable) {
         log.debug("REST request to get a page of Devices");
         Page<Device> page = deviceRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/devices");
-        return new ResponseEntity<>(deviceMapper.toDto(page.getContent()), headers, HttpStatus.OK);
+        List<DeviceDTO> deviceDTOList = deviceMapper.toDto(page.getContent());
+        // Remove device notes when not getting specific device
+        deviceDTOList.forEach(deviceDTO -> {
+            deviceDTO.setNotes("");
+        });
+        return new ResponseEntity<>(deviceDTOList, headers, HttpStatus.OK);
     }
 
     /**
@@ -114,6 +126,7 @@ public class DeviceResource {
      */
     @GetMapping("/devices/{id}")
     @Timed
+    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.USER})
     public ResponseEntity<DeviceDTO> getDevice(@PathVariable Long id) {
         log.debug("REST request to get Device : {}", id);
         Device device = deviceRepository.findOne(id);
@@ -129,6 +142,7 @@ public class DeviceResource {
      */
     @DeleteMapping("/devices/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteDevice(@PathVariable Long id) {
         log.debug("REST request to delete Device : {}", id);
         deviceRepository.delete(id);

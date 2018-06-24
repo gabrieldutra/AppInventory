@@ -3,28 +3,28 @@
     "appinventoryApp": {
         "device" : {
             "home": {
-                "title": "Devices",
-                "createLabel": "Criar novo Device",
-                "createOrEditLabel": "Criar ou editar Device"
+                "title": "Computadores",
+                "createLabel": "Inserir novo computador",
+                "createOrEditLabel": "Criar ou editar um computador"
             },
-            "created": "Um novo Device foi criado com o identificador {{ param }}",
-            "updated": "Um Device foi atualizado com o identificador {{ param }}",
-            "deleted": "Um Device foi deletado com o identificador {{ param }}",
+            "created": "Um novo computador foi adicionado com o identificador {{ param }}",
+            "updated": "Um computador foi atualizado com o identificador {{ param }}",
+            "deleted": "Um computador foi deletado com o identificador {{ param }}",
             "delete": {
-                "question": "Tem certeza de que deseja excluir Device {{ id }}?"
+                "question": "Tem certeza de que deseja excluir o computador {{ id }}?"
             },
             "detail": {
-                "title": "Device"
+                "title": "Computador"
             },
-            "vendor": "Vendor",
-            "version": "Version",
-            "model": "Model",
-            "serialNumber": "Serial Number",
-            "computerName": "Computer Name",
-            "systemType": "System Type",
-            "owner": "Owner",
-            "notes": "Notes",
-            "created": "Created"
+            "vendor": "Marca",
+            "version": "Versão",
+            "model": "Modelo",
+            "serialNumber": "Número de serial",
+            "computerName": "Nome do computador",
+            "systemType": "Tipo de sistema",
+            "owner": "Colaborador",
+            "notes": "Notas",
+            "created": "Adicionado em"
         }
     }
 }

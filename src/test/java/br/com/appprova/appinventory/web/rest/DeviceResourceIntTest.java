@@ -155,7 +155,6 @@ public class DeviceResourceIntTest {
         assertThat(testDevice.getSystemType()).isEqualTo(DEFAULT_SYSTEM_TYPE);
         assertThat(testDevice.getOwner()).isEqualTo(DEFAULT_OWNER);
         assertThat(testDevice.getNotes()).isEqualTo(DEFAULT_NOTES);
-        assertThat(testDevice.getCreated()).isEqualTo(DEFAULT_CREATED);
     }
 
     @Test
@@ -196,7 +195,7 @@ public class DeviceResourceIntTest {
             .andExpect(jsonPath("$.[*].computerName").value(hasItem(DEFAULT_COMPUTER_NAME.toString())))
             .andExpect(jsonPath("$.[*].systemType").value(hasItem(DEFAULT_SYSTEM_TYPE.toString())))
             .andExpect(jsonPath("$.[*].owner").value(hasItem(DEFAULT_OWNER.toString())))
-            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES.toString())))
+            .andExpect(jsonPath("$.[*].notes").value(""))
             .andExpect(jsonPath("$.[*].created").value(hasItem(sameInstant(DEFAULT_CREATED))));
     }
 
@@ -270,7 +269,6 @@ public class DeviceResourceIntTest {
         assertThat(testDevice.getSystemType()).isEqualTo(UPDATED_SYSTEM_TYPE);
         assertThat(testDevice.getOwner()).isEqualTo(UPDATED_OWNER);
         assertThat(testDevice.getNotes()).isEqualTo(UPDATED_NOTES);
-        assertThat(testDevice.getCreated()).isEqualTo(UPDATED_CREATED);
     }
 
     @Test
