@@ -35,14 +35,17 @@ export class DeviceDetailComponent implements OnInit, OnDestroy {
 
     createList(element) {
         const listElement = document.createElement('ul');
-        const liElement = document.createElement('li');
 
         for (const value in element) {
             if (Array.isArray(element)) {
+                const liElement = document.createElement('li');
                 const childList = this.createList(element[value]);
+
                 liElement.appendChild(childList);
                 listElement.appendChild(liElement);
             } else {
+                const liElement = document.createElement('li');
+
                 liElement.innerText = value + ': ' + element[value];
                 listElement.appendChild(liElement);
             }
