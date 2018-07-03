@@ -59,14 +59,19 @@ export class DeviceDetailComponent implements OnInit, OnDestroy {
                 this.device = deviceResponse.body;
 
                 this.deviceNotes = document.createElement('div');
-                const notesJson = JSON.parse(this.device.notes);
-                for (const note in notesJson) {
-                    if (notesJson[note] != null) {
-                        const name = document.createElement('dt');
-                        const value = this.createList(notesJson[note].value);
-                        name.innerText = notesJson[note].name;
-                        this.deviceNotes.appendChild(name);
-                        this.deviceNotes.appendChild(value);
+
+                let notesJson;
+
+                if (this.device.notes !== undefined) {
+                    notesJson = JSON.parse(this.device.notes);
+                    for (const note in notesJson) {
+                        if (notesJson[note] != null) {
+                            const name = document.createElement('dt');
+                            const value = this.createList(notesJson[note].value);
+                            name.innerText = notesJson[note].name;
+                            this.deviceNotes.appendChild(name);
+                            this.deviceNotes.appendChild(value);
+                        }
                     }
                 }
             });
