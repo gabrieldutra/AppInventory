@@ -14,6 +14,7 @@ import { DeviceService } from './device.service';
 export class DeviceDetailComponent implements OnInit, OnDestroy {
 
     device: Device;
+    deviceNotes: HTMLElement;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
@@ -32,10 +33,39 @@ export class DeviceDetailComponent implements OnInit, OnDestroy {
         this.registerChangeInDevices();
     }
 
+    createList(element) {
+        const listElement = document.createElement('ul');
+        const liElement = document.createElement('li');
+
+        for (const value in element) {
+            if (Array.isArray(element)) {
+                const childList = this.createList(element[value]);
+                liElement.appendChild(childList);
+                listElement.appendChild(liElement);
+            } else {
+                liElement.innerText = value + ': ' + element[value];
+                listElement.appendChild(liElement);
+            }
+        }
+        return listElement;
+    }
+
     load(id) {
         this.deviceService.find(id)
             .subscribe((deviceResponse: HttpResponse<Device>) => {
                 this.device = deviceResponse.body;
+
+                this.deviceNotes = document.createElement('div');
+                const notesJson = JSON.parse(this.device.notes);
+                for (const note in notesJson) {
+                    if (notesJson[note] != null) {
+                        const name = document.createElement('dt');
+                        const value = this.createList(notesJson[note].value);
+                        name.innerText = notesJson[note].name;
+                        this.deviceNotes.appendChild(name);
+                        this.deviceNotes.appendChild(value);
+                    }
+                }
             });
     }
     byteSize(field) {

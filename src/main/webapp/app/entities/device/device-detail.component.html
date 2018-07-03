@@ -32,10 +32,8 @@
         <dd>
             <span>{{device.owner}}</span>
         </dd>
-        <dt><span jhiTranslate="appinventoryApp.device.notes">Notes</span></dt>
-        <dd>
-            <span>{{device.notes}}</span>
-        </dd>
+        <div [innerHTML]="deviceNotes.outerHTML">
+        </div>
         <dt><span jhiTranslate="appinventoryApp.device.created">Created</span></dt>
         <dd>
             <span>{{device.created | date:'medium'}}</span>
